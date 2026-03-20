@@ -7,6 +7,7 @@ TagManager:
   - CollectibleTag
   - EnemyTag
   - WaterTag
+  - LadderTag
   layers:
   - Default
   - TransparentFX
