@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - CollectibleTag
+  - EnemyTag
+  - WaterTag
   layers:
   - Default
   - TransparentFX
