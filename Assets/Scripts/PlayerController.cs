@@ -18,8 +18,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float rotationSpeed = 10f;
-
-
+    public bool isClimbing; 
 
 
   
@@ -62,8 +61,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isClimbing)
+        {
+            // Do not apply normal movement while climbing
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            return;
+        }
 
-        
         // so that player can move with camera 
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 plane = Vector3.ProjectOnPlane(cameraForward, Vector3.up);
@@ -75,14 +79,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector3(rotatedMovement.x, rb.linearVelocity.y, rotatedMovement.z);
 
 
-
-
-
-
-
     }
-
-
 
 
     /// <summary>
