@@ -14,14 +14,7 @@ public class PlayerLife : MonoBehaviour
         isDead = false;   //coz your not dead at the begining of the game
     }
 
-    // die if you toch enemy 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("EnemyTag"))
-        {
-            Die();
-        }
-    }
+   
 
     // die if you touch water (trigger)
     private void OnTriggerEnter(Collider other)
