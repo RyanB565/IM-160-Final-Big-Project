@@ -1,21 +1,34 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/*****************************************************************************
+ // File Name      : PlayerLife.cs
+ // Author         : Ryan Blanco
+ // Creation Date  : March 18, 2026
+ //
+ // Brief Description : tracks collectables and spawns exit once we have all collectables collected and sends to 
+// next level
+ *****************************************************************************/
 public class PlayerLife : MonoBehaviour
 {
     [SerializeField] private float reloadDelay;
     [SerializeField] private float lowestYPos;
     [SerializeField] private AudioSource deadSound;
     private bool isDead;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+    /// <summary>
+    /// Start
+    /// </summary>
     void Start()
     {
         isDead = false;   //coz your not dead at the begining of the game
     }
 
-   
 
+    /// <summary>
+    /// kills player if they toch water
+    /// </summary>
     // die if you touch water (trigger)
     private void OnTriggerEnter(Collider other)
     {
@@ -26,7 +39,9 @@ public class PlayerLife : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Die
+    /// </summary>
     private void Die()
     {
         isDead = true;

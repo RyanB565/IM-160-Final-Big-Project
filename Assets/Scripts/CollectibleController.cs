@@ -20,7 +20,9 @@ public class CollectibleController : MonoBehaviour
 
     //  reference to the CollectibleManager so we can notify it
     private CollectibleManager manager;
-
+    /// <summary>
+    /// start
+    /// </summary>
     // Sets the starting collectible count and updates the UI text
     void Start()
     {
