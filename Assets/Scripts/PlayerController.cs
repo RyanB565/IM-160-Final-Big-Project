@@ -38,15 +38,19 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    
 
-  
 
+
+    /// <summary>
+    /// MoveCaneled
+    /// </summary>
     private void MoveCanceled(InputAction.CallbackContext obj)
     {
         playerMovement = Vector3.zero;
     }
-
+    /// <summary>
+    /// MovePerformed
+    /// </summary>
     private void MovePerformed(InputAction.CallbackContext obj)
     {
         playerMovement.x = obj.ReadValue<Vector2>().x * playerSpeed;

@@ -32,12 +32,16 @@ public class PlayerInvisibility : MonoBehaviour
     }
 
     // Get the MeshRenderer at the start of the game
- 
+    /// <summary>
+    /// Start
+    /// </summary>
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
     }
-
+    /// <summary>
+    /// Update
+    /// </summary>
     // Check for invisibility toggle input
     void Update()
     {
@@ -46,7 +50,9 @@ public class PlayerInvisibility : MonoBehaviour
             ToggleInvisibility();
         }
     }
-
+    /// <summary>
+    /// Toggle Invisibility
+    /// </summary>
     // Turns invisibility on or off
     private void ToggleInvisibility()
     {

@@ -22,6 +22,9 @@ public class Ladder : MonoBehaviour
     private Rigidbody playerRb;
 
     // When the player enters the ladder trigger
+    /// <summary>
+    /// Gravity is disabled and isClimbing is activated
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -35,7 +38,9 @@ public class Ladder : MonoBehaviour
             isClimbing = true;
         }
     }
-
+    /// <summary>
+    /// Restores gravity and disables isclimbing
+    /// </summary>
     // When the player exits the ladder trigger
     private void OnTriggerExit(Collider other)
     {
@@ -49,7 +54,9 @@ public class Ladder : MonoBehaviour
             isClimbing = false;
         }
     }
-
+    /// <summary>
+    /// Moves player up and down on vertival input
+    /// </summary>
     // While the player stays inside the ladder trigger
     private void OnTriggerStay(Collider other)
     {
