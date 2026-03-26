@@ -60,6 +60,13 @@ public class PlayerInvisibility : MonoBehaviour
 
         // Hide the player when invisible
         meshRenderer.enabled = !isInvisible;
+
+        if (isInvisible)
+            gameObject.layer = LayerMask.NameToLayer("PlayerInvisible"); // player is invisible for enemy to kill
+        else
+            gameObject.layer = LayerMask.NameToLayer("PlayerVisible"); // player is visible for enemy to kill
+
+
     }
 
 
