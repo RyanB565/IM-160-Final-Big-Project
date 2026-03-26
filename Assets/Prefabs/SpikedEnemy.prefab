@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5983462479377146233}
   - component: {fileID: 6815848152150876848}
   - component: {fileID: 5789798183539745118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpikedEnemy
   m_TagString: EnemyTag
   m_Icon: {fileID: 0}
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 6270902710788983040}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.14, y: -0.39, z: 29.39}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -1.14, y: -0.5199, z: 29.39}
+  m_LocalScale: {x: 2, y: 1.7402, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
