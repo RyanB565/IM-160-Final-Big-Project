@@ -8,6 +8,7 @@ TagManager:
   - EnemyTag
   - WaterTag
   - LadderTag
+  - EyeballEnemy
   layers:
   - Default
   - TransparentFX

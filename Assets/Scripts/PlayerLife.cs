@@ -70,11 +70,21 @@ public class PlayerLife : MonoBehaviour
     /// </summary>
 
     // Update is called once per frame
-    private void Update()
+    public void Update()
     {
         if (transform.position.y < lowestYPos && !isDead)
         {
             Die();
         }
     }
+
+    /// <summary>
+    /// kills the player from enemy collision
+    /// </summary>
+    public void KillPlayer()
+    {
+        Die();
+    }
+
+
 }
