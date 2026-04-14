@@ -11,6 +11,7 @@
 
 
 
+using System.Collections;
 using UnityEngine;
 
 public class PlayerInvisibility : MonoBehaviour
@@ -26,6 +27,12 @@ public class PlayerInvisibility : MonoBehaviour
     private MeshRenderer meshRenderer;
 
     // Allows other scripts to check invisibility
+
+    [SerializeField] private float cooldownTime = 3f;
+    private bool onCooldown = false;
+    [SerializeField] private float invisDuration = 5f;
+
+
     public bool IsInvisible
     {
         get { return isInvisible; }
@@ -39,16 +46,54 @@ public class PlayerInvisibility : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
     }
+
+
     /// <summary>
-    /// Update
+    /// turn player invisible and starts timer
+    /// </summary>
+
+    private void ActivateInvisibility()   
+    {
+        isInvisible = true;
+        meshRenderer.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("PlayerInvisible");
+
+        StartCoroutine(InvisibilityTimer());   
+    }
+
+
+    /// <summary>
+    /// invisibility duration and then makes player visible agian
+    /// </summary
+    private IEnumerator InvisibilityTimer()   
+    {
+        yield return new WaitForSeconds(invisDuration);
+
+        isInvisible = false;
+        meshRenderer.enabled = true;
+        gameObject.layer = LayerMask.NameToLayer("PlayerVisible");
+    }
+
+    /// <summary>
+    /// update
     /// </summary>
     // Check for invisibility toggle input
     void Update()
     {
-        if (Input.GetKeyDown(invisibilityKey))
+        if (Input.GetKeyDown(invisibilityKey) && !onCooldown)
         {
-            ToggleInvisibility();
+            ActivateInvisibility();
         }
+    }
+
+    /// <summary>
+    /// Couroutine for invisibilty cooldown
+    /// </summary>
+    private IEnumerator InvisibilityCooldown() 
+    {
+        onCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        onCooldown = false;
     }
     /// <summary>
     /// Toggle Invisibility
@@ -66,9 +111,9 @@ public class PlayerInvisibility : MonoBehaviour
         else
             gameObject.layer = LayerMask.NameToLayer("PlayerVisible"); // player is visible for enemy to kill
 
-
+        StartCoroutine(InvisibilityCooldown());
     }
-
+   
 
 
 }
