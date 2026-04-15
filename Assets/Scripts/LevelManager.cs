@@ -13,5 +13,10 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static int currentLevel = 1;
-   
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
 }

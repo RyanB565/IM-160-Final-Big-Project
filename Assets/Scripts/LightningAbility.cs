@@ -29,6 +29,8 @@ public class LightningAbility : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
 
+
+
     /// <summary>
     /// Update
     /// </summary>
@@ -52,17 +54,18 @@ public class LightningAbility : MonoBehaviour
     // spawns lightning 
     private void ShootLightning()
     {
+
+
         onCooldown = true;
         Invoke("ResetCooldown", shootCooldown);
 
-        // IM-160 aiming: use camera forward directly
+        
         Vector3 shootDirection = cameraTransform.forward;
 
         GameObject bolt = Instantiate(lightningPrefab, spawnPoint.position, spawnPoint.rotation);
 
         Rigidbody rb = bolt.GetComponent<Rigidbody>();
         rb.linearVelocity = shootDirection * lightningSpeed;
-
 
     }
     /// <summary>
