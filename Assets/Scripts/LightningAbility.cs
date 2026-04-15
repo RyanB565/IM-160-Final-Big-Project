@@ -32,14 +32,19 @@ public class LightningAbility : MonoBehaviour
     /// <summary>
     /// Update
     /// </summary>
-    // checks for rc input and shoots lighting if not on cooldown
+    // checks for rc input and shoots lighting if not on cooldown also locks lightning until lvl 2 and onward
     void Update()
     {
-        // Right-click = Mouse1
+        // Lightning unlocks at level 2 and onward
+        if (LevelManager.currentLevel < 2)
+            return;
+
+        // Right-click shoot lightning
         if (Input.GetKeyDown(KeyCode.Mouse0) && onCooldown == false)
         {
             ShootLightning();
         }
+
     }
     /// <summary>
     /// Spawns teh lightning prefab and moves it 
