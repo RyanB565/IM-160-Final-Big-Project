@@ -35,8 +35,11 @@ public class LightningAbility : MonoBehaviour
     /// Update
     /// </summary>
     // checks for rc input and shoots lighting if not on cooldown also locks lightning until lvl 2 and onward
+    // also moves lighting spawnpoint with camera
     void Update()
     {
+        spawnPoint.rotation = cameraTransform.rotation;
+
         // Lightning unlocks at level 2 and onward
         if (LevelManager.currentLevel < 2)
             return;
@@ -64,7 +67,9 @@ public class LightningAbility : MonoBehaviour
 
         GameObject bolt = Instantiate(lightningPrefab, spawnPoint.position, spawnPoint.rotation);
 
-        Rigidbody rb = bolt.GetComponent<Rigidbody>();
+        
+
+        Rigidbody rb = bolt.GetComponentInChildren<Rigidbody>();
         rb.linearVelocity = shootDirection * lightningSpeed;
 
     }
