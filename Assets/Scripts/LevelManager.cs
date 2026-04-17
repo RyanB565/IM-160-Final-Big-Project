@@ -12,9 +12,12 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+  
     public static int currentLevel = 1;
-
-    void Awake()
+    /// <summary>
+    /// Awakew
+    /// </summary>
+    void Awake() // dosent destoy lvel manger on load
     {
         DontDestroyOnLoad(gameObject);
     }
