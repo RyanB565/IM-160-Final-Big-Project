@@ -44,7 +44,7 @@ public class LightningAbility : MonoBehaviour
         if (LevelManager.currentLevel < 2)
             return;
 
-        // Right-click shoot lightning
+        // Left-click shoot lightning
         if (Input.GetKeyDown(KeyCode.Mouse0) && onCooldown == false)
         {
             ShootLightning();
@@ -52,7 +52,7 @@ public class LightningAbility : MonoBehaviour
 
     }
     /// <summary>
-    /// Spawns teh lightning prefab and moves it 
+    /// Spawns the lightning prefab and moves it 
     /// </summary>
     // spawns lightning 
     private void ShootLightning()
