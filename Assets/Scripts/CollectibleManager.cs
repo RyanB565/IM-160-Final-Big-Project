@@ -18,6 +18,16 @@ public class CollectibleManager : MonoBehaviour
     [SerializeField] private GameObject exitDoor;
 
     /// <summary>
+    /// total collectibles
+    /// </summary>
+    
+    public int TotalCollectibles
+    {
+        get { return totalCollectibles; }
+    }
+
+
+    /// <summary>
     /// Counts all collectibles in the scene at the start of the game.
     /// </summary>
     private void Start()

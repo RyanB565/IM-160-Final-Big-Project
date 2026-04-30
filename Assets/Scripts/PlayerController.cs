@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 /*****************************************************************************
@@ -18,10 +19,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float rotationSpeed = 10f;
-    public bool isClimbing; 
+    public bool isClimbing;
+    public Vector3 respawnPoint;
+    private bool canDetectWater = true;
+    private bool ignoreWater = false;
 
 
-  
+
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,7 +41,9 @@ public class PlayerController : MonoBehaviour
         move.performed += MovePerformed;
         move.canceled += MoveCanceled;
 
-       
+        respawnPoint = transform.position;
+        Debug.Log("START RESPAWN POINT: " + respawnPoint);
+
     }
 
 
@@ -76,15 +84,92 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 plane = Vector3.ProjectOnPlane(cameraForward, Vector3.up);
         Quaternion oriantation = Quaternion.LookRotation(plane);
+        transform.rotation = Quaternion.Slerp(transform.rotation, oriantation, rotationSpeed * Time.deltaTime);
 
         Vector3 rotatedMovement = playerMovement;
 
         rotatedMovement = oriantation * rotatedMovement;
         rb.linearVelocity = new Vector3(rotatedMovement.x, rb.linearVelocity.y, rotatedMovement.z);
 
+        Vector3 lookDir = new Vector3(rotatedMovement.x, 0f, rotatedMovement.z);
+        if (lookDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        }
 
     }
+  
+    /// <summary>
+    /// respans player if they were killed by these and detecs respawn 
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
 
+        // checkpoint reached update respawn position
+        if (other.CompareTag("Checkpoint"))
+        {
+            respawnPoint = other.transform.position;
+             
+            Debug.Log("CHECKPOINT SET TO: " + respawnPoint);
+
+        }
+
+        // water hit  respawn player
+        if (other.CompareTag("WaterTag") && !ignoreWater)
+        {
+            Respawn();
+        }
+
+        // enemy hit respawn player
+      
+        if (other.CompareTag("EyeballEnemy") || other.CompareTag("EnemyTag"))
+        {
+            Respawn();
+        }
+    }
+
+    /// <summary>
+    /// cooldown for water
+    /// </summary>
+    /// <returns></returns>
+    private System.Collections.IEnumerator WaterCooldown()
+    {
+        canDetectWater = false;
+        yield return new WaitForSeconds(0.2f);
+        canDetectWater = true;
+    }
+
+    /// <summary>
+    /// ignores water after death
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator IgnoreWater()
+    {
+        ignoreWater = true;
+        yield return new WaitForSeconds(0.3f); // ignore water for 0.3 seconds
+        ignoreWater = false;
+    }
+
+
+    /// <summary>
+    /// Respawn
+    /// </summary>
+    public void Respawn() //lets the plaayer respawn to checkpoints
+    {
+
+        Debug.Log("RESPAWNING AT: " + respawnPoint);
+        transform.position = respawnPoint;
+        rb.linearVelocity = Vector3.zero;
+        StartCoroutine(WaterCooldown());
+        StartCoroutine(IgnoreWater());
+
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+    }
 
     /// <summary>
     /// Deactivates/Removes the inputs

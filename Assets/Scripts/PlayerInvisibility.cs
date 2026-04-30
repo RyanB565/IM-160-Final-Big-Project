@@ -13,6 +13,7 @@
 
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class PlayerInvisibility : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PlayerInvisibility : MonoBehaviour
     [SerializeField] private float cooldownTime = 3f;
     private bool onCooldown = false;
     [SerializeField] private float invisDuration = 5f;
+    [SerializeField] private TMP_Text invisTimerText;
 
 
     public bool IsInvisible
@@ -45,6 +47,7 @@ public class PlayerInvisibility : MonoBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        invisTimerText.text = "";
     }
 
 
@@ -67,11 +70,22 @@ public class PlayerInvisibility : MonoBehaviour
     /// </summary
     private IEnumerator InvisibilityTimer()   
     {
-        yield return new WaitForSeconds(invisDuration);
+        float endTime = Time.time + invisDuration;
+
+        while (Time.time < endTime)
+        {
+            float timeLeft = endTime - Time.time;
+            invisTimerText.text = "Invisible: " + timeLeft.ToString("F1");
+            yield return null;
+        }
+
+        invisTimerText.text = "";
 
         isInvisible = false;
         meshRenderer.enabled = true;
         gameObject.layer = LayerMask.NameToLayer("PlayerVisible");
+
+        StartCoroutine(InvisibilityCooldown());
     }
 
     /// <summary>
@@ -92,7 +106,14 @@ public class PlayerInvisibility : MonoBehaviour
     private IEnumerator InvisibilityCooldown() 
     {
         onCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
+        float endTime = Time.time + cooldownTime;
+
+        while (Time.time < endTime)
+        {
+            float timeLeft = endTime - Time.time;
+            yield return null;
+        }
+
         onCooldown = false;
     }
     /// <summary>
