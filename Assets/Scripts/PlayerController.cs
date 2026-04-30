@@ -8,7 +8,8 @@ using UnityEngine.InputSystem;
  // Author         : Ryan Blanco
  // Creation Date  : March 18, 2026
  //
- // Brief Description : Controller so that we can controll the player also so that we roate with the camera 
+ // Brief Description : Controller so that we can controll the player also so that we roate with the camera and
+//                       does checkpoints
  *****************************************************************************/
 
 public class PlayerController : MonoBehaviour
@@ -116,8 +117,8 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        // water hit  respawn player
-        if (other.CompareTag("WaterTag") && !ignoreWater)
+        // water hit respawn player
+        if (other.CompareTag("WaterTag")  && !ignoreWater)
         {
             Respawn();
         }
@@ -128,6 +129,8 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
+
+       
     }
 
     /// <summary>
