@@ -9,6 +9,7 @@ TagManager:
   - WaterTag
   - LadderTag
   - EyeballEnemy
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

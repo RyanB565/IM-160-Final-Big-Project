@@ -20,6 +20,9 @@ public class CollectibleController : MonoBehaviour
 
     //  reference to the CollectibleManager so we can notify it
     private CollectibleManager manager;
+    private int totalCollectibles;
+
+ 
     /// <summary>
     /// start
     /// </summary>
@@ -31,8 +34,12 @@ public class CollectibleController : MonoBehaviour
 
         //  find the manager in the scene
         manager = FindAnyObjectByType<CollectibleManager>();
-    }
 
+        totalCollectibles = manager.TotalCollectibles;
+        collectibleText.text = "Collectibles: " + collectibleCount + " / " + totalCollectibles;
+
+    }
+   
     /// <summary>
     /// Detects when the player touches a collectible and increases the count
     /// </summary>
@@ -46,7 +53,8 @@ public class CollectibleController : MonoBehaviour
             collectibleCount++;
 
             // Update the UI text to show the new total
-            collectibleText.text = "Collectibles: " + collectibleCount.ToString();
+            collectibleText.text = "Collectibles: " + collectibleCount + " / " + totalCollectibles;
+
 
 
             if (collectSound != null)

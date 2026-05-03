@@ -25,20 +25,6 @@ public class PlayerLife : MonoBehaviour
         isDead = false;   //coz your not dead at the begining of the game
     }
 
-
-    /// <summary>
-    /// kills player if they toch water
-    /// </summary>
-    // die if you touch water (trigger)
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("WaterTag"))
-        {
-            Die();
-        }
-    }
-
-
     /// <summary>
     /// Die
     /// </summary>
