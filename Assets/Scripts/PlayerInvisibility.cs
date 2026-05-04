@@ -33,6 +33,7 @@ public class PlayerInvisibility : MonoBehaviour
     private bool onCooldown = false;
     [SerializeField] private float invisDuration = 5f;
     [SerializeField] private TMP_Text invisTimerText;
+    private PlayerController playerController;
 
 
     public bool IsInvisible
@@ -48,6 +49,8 @@ public class PlayerInvisibility : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         invisTimerText.text = "";
+        playerController = GetComponent<PlayerController>();
+
     }
 
 
@@ -91,13 +94,17 @@ public class PlayerInvisibility : MonoBehaviour
     /// <summary>
     /// update
     /// </summary>
-    // Check for invisibility toggle input
+    // Check for invisibility toggle input and for tutorial
     void Update()
     {
         if (Input.GetKeyDown(invisibilityKey) && !onCooldown)
         {
+
+          
             ActivateInvisibility();
         }
+
+
     }
 
     /// <summary>
