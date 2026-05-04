@@ -102,6 +102,7 @@ public class PlayerInvisibility : MonoBehaviour
 
           
             ActivateInvisibility();
+            playerController.hasUsedInvisibility = true;
         }
 
 

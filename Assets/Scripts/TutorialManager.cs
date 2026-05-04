@@ -90,7 +90,7 @@ public class TutorialManager : MonoBehaviour
             if (player.avoidedWater)
             {
                 step = 7;
-                tutorialText.text = "Walk into the checkpoint to save your progress";
+                tutorialText.text = "There is invisble checkpoints that will save your progress if you die";
             }
         }
 
