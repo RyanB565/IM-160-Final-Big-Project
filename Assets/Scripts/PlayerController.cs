@@ -25,6 +25,18 @@ public class PlayerController : MonoBehaviour
     private bool canDetectWater = true;
     private bool ignoreWater = false;
 
+    // Tutorial triggers
+    public bool hasMoved = false;
+    public bool hasUsedInvisibility = false;
+    public bool avoidedSpikes = false;
+    public bool avoidedWater = false;
+    public bool reachedTutorialCheckpoint = false;
+    public bool collectedTutorialGold = false;
+    public bool reachedPlatform = false;
+    public bool usedLadder = false;
+    public bool hasUsedLightning = false;
+
+
 
 
 
@@ -99,8 +111,16 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
         }
 
+        if (playerMovement.x != 0 || playerMovement.z != 0)
+        {
+            hasMoved = true;
+        }
+
+
+
+
     }
-  
+
     /// <summary>
     /// respans player if they were killed by these and detecs respawn 
     /// </summary>

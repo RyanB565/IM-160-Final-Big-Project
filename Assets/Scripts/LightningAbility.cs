@@ -27,7 +27,15 @@ public class LightningAbility : MonoBehaviour
     [SerializeField] private float shootCooldown = 1f;
     private bool onCooldown = false;
     [SerializeField] private Transform cameraTransform;
+    private PlayerController playerController;
 
+    /// <summary>
+    /// Start
+    /// </summary>
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
 
 
@@ -47,6 +55,8 @@ public class LightningAbility : MonoBehaviour
         // Left-click shoot lightning
         if (Input.GetKeyDown(KeyCode.Mouse0) && onCooldown == false)
         {
+            playerController.hasUsedLightning = true;
+
             ShootLightning();
         }
 
@@ -72,6 +82,7 @@ public class LightningAbility : MonoBehaviour
         Rigidbody rb = bolt.GetComponentInChildren<Rigidbody>();
         rb.linearVelocity = shootDirection * lightningSpeed;
 
+       
     }
     /// <summary>
     /// Allows player to shoot lightning agian

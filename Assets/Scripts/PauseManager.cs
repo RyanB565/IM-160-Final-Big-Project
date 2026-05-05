@@ -1,5 +1,5 @@
 /******************************************************************************
-// File Name : End.cs
+// File Name : PuaseManager.cs
 // Author : Ryan Blanco
 // Creation Date : March 21, 2026
 //
@@ -17,6 +17,12 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseMenuUI;
 
     private bool isPaused = false;
+    public bool IsPaused
+    {
+        get { return isPaused; }
+    }
+
+
 
     /// <summary>
     /// Update
