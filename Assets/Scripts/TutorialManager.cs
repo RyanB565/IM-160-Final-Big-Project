@@ -20,7 +20,16 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         tutorialText.text = "Use WASD to move";
+
+        if (LevelManager.currentLevel < 2)
+        {
+            // Skip lightning tutorial entirely
+            player.hasUsedLightning = true;
+        }
     }
+
+
+
 
     void Update()
     {
@@ -113,7 +122,43 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Go to the exit to finish the tutorial";
             }
         }
+
+        else if (step == 9)
+        {
+            // Waiting for exit door trigger
+        }
+
+        else if (step == 10)
+        {
+            // Only show lightning tutorial in Level 2 and beyond
+            if (LevelManager.currentLevel >= 2)
+            {
+                tutorialText.text = "Press Right Click to use Lightning and kill eyeball enemy";
+
+                if (player.hasUsedLightning)
+                {
+                    step = 11;
+                    tutorialText.text = "";
+                }
+            }
+            else
+            {
+                // Skip lightning in Level 1
+                step = 11;
+            }
+        }
+
     }
+        /// <summary>
+        /// Called by lightning tutorial checkpoint
+        /// </summary>
+public void StartLightningTutorial()
+    {
+        step = 10;
+    }
+
+
+
 }
 
 

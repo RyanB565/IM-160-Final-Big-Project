@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public bool collectedTutorialGold = false;
     public bool reachedPlatform = false;
     public bool usedLadder = false;
+    public bool hasUsedLightning = false;
+
 
 
 

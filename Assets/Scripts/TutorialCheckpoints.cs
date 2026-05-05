@@ -48,7 +48,12 @@ public class TutorialCheckpoints : MonoBehaviour
             {
                 p.usedLadder = true;
             }
+            else if (tutorialcheckpoints == "Lightning")
+            {
+                // Start lightning tutorial step
+                Object.FindFirstObjectByType<TutorialManager>().StartLightningTutorial();
 
+            }
         }
     }
 }
